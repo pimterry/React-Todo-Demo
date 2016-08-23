@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import { TodoItem } from './TodoModel';
+
 export default class TodoInput extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { content: '', completed: false };
+    this.state = { content: '' };
   }
 
   handleContentChange(event) {
@@ -14,7 +16,7 @@ export default class TodoInput extends Component {
     event.preventDefault();
     if (!this.state.content) return;
 
-    this.props.onTodoAdded(this.state);
+    this.props.onTodoAdded(new TodoItem(this.state.content));
     this.setState({ content: '' });
   }
 
