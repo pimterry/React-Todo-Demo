@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 export default class TodoInput extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.state = { content: '' };
+    this.state = { content: '', completed: false };
   }
 
   handleContentChange(event) {

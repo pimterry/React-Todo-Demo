@@ -6,23 +6,35 @@ import './TodoList.css';
 export default class TodoList extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = { todos: [] };
   }
 
   addTodo(todo) {
-    var todos = this.state.todos.concat(todo);
-    this.setState({ todos: todos });
+    this.setState({
+      todos: this.state.todos.concat(todo)
+    });
+  }
+
+  toggleTodo(todoToToggle) {
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        if (todo === todoToToggle) {
+          return Object.assign({}, todo, { completed: !todo.completed });
+        }
+        return todo;
+      })
+    });
   }
 
   render() {
+    var incompleteTodos = this.state.todos.filter((todo) => !todo.completed);
     return (
       <div className="todoList">
         <TodoInput onTodoAdded={this.addTodo.bind(this)} />
 
         <ul>
-        {this.state.todos.map((todo, i) => (
-          <TodoItem content={todo.content} key={i} />
+        {incompleteTodos.map((todo, i) => (
+          <TodoItem content={todo.content} key={i} onTodoToggled={this.toggleTodo.bind(this, todo)} />
         ))}
         </ul>
       </div>

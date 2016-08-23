@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 export default class TodoItem extends Component {
   render() {
     return (
-      <li>{this.props.content}</li>
+      <li>
+        <input type="checkbox" value={this.props.completed} onChange={this.props.onTodoToggled} />
+        <div className="content">{this.props.content}</div>
+      </li>
     )
   }
 }
