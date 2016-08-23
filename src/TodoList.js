@@ -12,7 +12,7 @@ class TodoInput extends Component {
 class TodoItem extends Component {
   render() {
     return (
-      <div>A todo!</div>
+      <li>{this.props.content}</li>
     )
   }
 }
@@ -23,11 +23,11 @@ class TodoList extends Component {
       <div className="TodoList">
         <TodoInput/>
 
-        <TodoItem/>
-        <TodoItem/>
-        <TodoItem/>
-        <TodoItem/>
-        <TodoItem/>
+        <ul>
+        {this.props.todos.map((todo, i) => (
+          <TodoItem content={todo.content} key={i} />
+        ))}
+        </ul>
       </div>
     );
   }
