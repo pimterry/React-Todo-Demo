@@ -47,12 +47,12 @@ export default class TodoItem extends Component {
       <li onClick={this.handleClick.bind(this)}>
         <input type="checkbox" value={todo.completed} onChange={this.props.onTodoToggled} />
         { this.state.editable ? (
-          <form onSubmit={this.handleSaveChanges.bind(this)}>
+          <form onSubmit={this.handleSaveChanges.bind(this)}
+                onKeyDown={this.handleKeyPress.bind(this)}>
             <input className="content"
                    type="text"
                    autoFocus
                    value={this.state.editedContent}
-                   onKeyDown={this.handleKeyPress.bind(this)}
                    onChange={this.handleContentEdited.bind(this)} />
             <input type="submit" value="Save changes" />
             <input type="button" value="Cancel" onClick={this.handleCancel.bind(this)} />
