@@ -44,6 +44,7 @@ export default class TodoItem extends Component {
           <form onSubmit={this.handleSaveChanges.bind(this)}>
             <input className="content"
                    type="text"
+                   autoFocus
                    value={this.state.editedContent}
                    onChange={this.handleContentEdited.bind(this)} />
             <input type="submit" value="Save changes" />
