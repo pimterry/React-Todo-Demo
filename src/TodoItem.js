@@ -8,12 +8,15 @@ export default class TodoItem extends Component {
   }
 
   handleClick(event) {
-    this.setState(Object.assign({}, this.state, { editable: true }));
+    this.setState(Object.assign({}, this.state,
+      { editable: true }));
   }
 
   handleContentEdited(event) {
     var newContent = event.target.value;
-    this.setState(Object.assign({}, this.state, { editedContent: newContent }));
+
+    this.setState(Object.assign({}, this.state,
+      { editedContent: newContent }));
   }
 
   handleSaveChanges(event) {
@@ -22,7 +25,14 @@ export default class TodoItem extends Component {
     var newTodo = this.props.todo.updateContent(this.state.editedContent);
     this.props.onTodoUpdated(newTodo);
 
-    this.setState(Object.assign({}, this.state, { editable: false }));
+    this.setState(Object.assign({}, this.state,
+      { editable: false }));
+  }
+
+  handleCancel(event) {
+    event.stopPropagation();
+    this.setState(Object.assign({}, this.state,
+      { editable: false, editedContent: this.props.todo.content }));
   }
 
   render() {
@@ -37,6 +47,7 @@ export default class TodoItem extends Component {
                    value={this.state.editedContent}
                    onChange={this.handleContentEdited.bind(this)} />
             <input type="submit" value="Save changes" />
+            <input type="button" value="Cancel" onClick={this.handleCancel.bind(this)} />
           </form>
         ) : (
           <div className="content">
