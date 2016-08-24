@@ -35,6 +35,12 @@ export default class TodoItem extends Component {
       { editable: false, editedContent: this.props.todo.content }));
   }
 
+  handleKeyPress(event) {
+    if (event.key === "Escape") {
+      this.handleCancel(event);
+    }
+  }
+
   render() {
     var todo = this.props.todo;
     return (
@@ -46,6 +52,7 @@ export default class TodoItem extends Component {
                    type="text"
                    autoFocus
                    value={this.state.editedContent}
+                   onKeyDown={this.handleKeyPress.bind(this)}
                    onChange={this.handleContentEdited.bind(this)} />
             <input type="submit" value="Save changes" />
             <input type="button" value="Cancel" onClick={this.handleCancel.bind(this)} />
