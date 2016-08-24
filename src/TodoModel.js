@@ -39,6 +39,10 @@ class ImmutableTreeNode {
 
         return this.setChildren(updatedChildren);
     }
+
+    getChildren(nodeMatcher = () => true) {
+        return this.children.filter(nodeMatcher);
+    }
 }
 
 export class TodoItems extends ImmutableTreeNode {
@@ -69,10 +73,6 @@ export class TodoItems extends ImmutableTreeNode {
         // Can't unindent nodes already at the root
         if (todoToUnindent.parent === this) return this;
         else return this.moveChild(todoToUnindent, todoToUnindent.parent.parent);
-    }
-
-    getIncomplete() {
-        return this.children.filter((t) => !t.completed);
     }
 }
 

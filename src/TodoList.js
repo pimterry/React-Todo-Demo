@@ -4,24 +4,33 @@ import { TodoItems } from './TodoModel';
 
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
+import EditableTodoItem from './EditableTodoItem';
 import './TodoList.css';
 
 export default class TodoList extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { todos: new TodoItems() };
+    this.state = { todos: new TodoItems(), editing: [] };
   }
 
   addTodo(todo) {
     this.setState({ todos: this.state.todos.addTodo(todo) });
   }
 
-  updateTodo(originalTodo, updatedTodo) {
-    this.setState({ todos: this.state.todos.updateTodo(originalTodo, updatedTodo) });
-  }
-
   toggleTodo(todoToToggle) {
     this.updateTodo(todoToToggle, todoToToggle.toggleCompletion());
+  }
+
+  startEditingTodo(todo) {
+    this.setState({ editing: this.state.editing.concat(todo.id) });
+  }
+
+  stopEditingTodo(todo) {
+    this.setState({ editing: this.state.editing.filter((id) => id !== todo.id) });
+  }
+
+  updateTodo(originalTodo, updatedTodo) {
+    this.setState({ todos: this.state.todos.updateTodo(originalTodo, updatedTodo) });
   }
 
   indentTodo(todo) {
@@ -36,7 +45,7 @@ export default class TodoList extends Component {
     return (
       <div className="todoList">
         <TodoInput onTodoAdded={this.addTodo.bind(this)} />
-        { this.renderTodos(this.state.todos.children) }
+        { this.renderTodos(this.state.todos.getChildren((t) => !t.completed)) }
       </div>
     );
   }
@@ -46,16 +55,26 @@ export default class TodoList extends Component {
 
     return (
       <ul>
-      { todos.map((todo, i) => (
-        <TodoItem key={i}
-                  todo={todo}
-                  onTodoToggled={this.toggleTodo.bind(this, todo)}
-                  onTodoUpdated={this.updateTodo.bind(this, todo)}
-                  onTodoIndented={this.indentTodo.bind(this, todo)}
-                  onTodoUnindented={this.unindentTodo.bind(this, todo)}>
-          { this.renderTodos(todo.children) }
-        </TodoItem>
-      ))}
+      { todos.map((todo, i) =>
+        this.state.editing.includes(todo.id) ? (
+          <EditableTodoItem
+                    key={todo.id}
+                    todo={todo}
+                    onTodoToggled={this.toggleTodo.bind(this, todo)}
+                    onTodoUpdated={this.updateTodo.bind(this, todo)}
+                    onTodoIndented={this.indentTodo.bind(this, todo)}
+                    onTodoUnindented={this.unindentTodo.bind(this, todo)}
+                    onStopEditing={this.stopEditingTodo.bind(this, todo)}>
+            { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+          </EditableTodoItem>
+        ) : (
+          <TodoItem key={todo.id}
+                    todo={todo}
+                    onTodoToggled={this.toggleTodo.bind(this, todo)}
+                    onClick={this.startEditingTodo.bind(this, todo)}>
+            { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+          </TodoItem>
+        ))}
       </ul>
     );
   }
