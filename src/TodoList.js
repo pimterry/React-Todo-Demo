@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { TodoItems } from './TodoModel';
+
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import './TodoList.css';
@@ -7,29 +9,23 @@ import './TodoList.css';
 export default class TodoList extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { todos: [] };
+    this.state = { todos: new TodoItems() };
   }
 
   addTodo(todo) {
-    this.setState({
-      todos: this.state.todos.concat(todo)
-    });
+    this.setState({ todos: this.state.todos.addTodo(todo) });
   }
 
   updateTodo(originalTodo, updatedTodo) {
-    this.setState({
-      todos: this.state.todos.map((todo) => todo === originalTodo ? updatedTodo : todo)
-    });
+    this.setState({ todos: this.state.todos.updateTodo(originalTodo, updatedTodo) });
   }
 
   toggleTodo(todoToToggle) {
-    this.setState({
-      todos: this.state.todos.map((todo) => todo === todoToToggle ? todo.toggleCompletion() : todo)
-    });
+    this.updateTodo(todoToToggle, todoToToggle.toggleCompletion());
   }
 
   render() {
-    var incompleteTodos = this.state.todos.filter((todo) => !todo.completed);
+    var incompleteTodos = this.state.todos.getIncomplete();
 
     return (
       <div className="todoList">

@@ -1,4 +1,23 @@
-// Immutable model for a todo, to keep core logic and any mutation out of the views.
+// Immutable models for a set of todos and each single todo, to keep core logic and any mutation out of the views.
+
+export class TodoItems {
+    constructor(todos = []) {
+        this.todos = todos;
+    }
+
+    addTodo(newTodo) {
+        return new TodoItems(this.todos.concat(newTodo));
+    }
+
+    updateTodo(originalTodo, updatedTodo) {
+        return new TodoItems(this.todos.map((todo) => todo === originalTodo ? updatedTodo : todo));
+    }
+
+    getIncomplete() {
+        return this.todos.filter((t) => !t.completed);
+    }
+}
+
 export class TodoItem {
     constructor(content, completed = false, parent = null, children = []) {
         this.content = content;
