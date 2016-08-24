@@ -1,3 +1,5 @@
+import uuid from 'uuid';
+
 // Immutable models for a set of todos and each single todo, to keep core logic and any mutation out of the views.
 // These could be done more efficiently, sticking with a simpler copy-frequently approach for now.
 // Could be done more simply mutably, but external API fits React much nicer this way
@@ -75,11 +77,13 @@ export class TodoItems extends ImmutableTreeNode {
 }
 
 export class TodoItem extends ImmutableTreeNode {
-    constructor(content, completed = false, parent = null, children = []) {
+    constructor(content, id = uuid.v4(), completed = false, parent = null, children = []) {
         super(parent,
               children,
               (newParent) => this.copyWithChanges({ parent: newParent }),
               (newChildren) => this.copyWithChanges({ children: newChildren }));
+
+        this.id = id;
         this.content = content;
         this.completed = completed;
     }
@@ -96,6 +100,7 @@ export class TodoItem extends ImmutableTreeNode {
     copyWithChanges(changes) {
         return new TodoItem(
             changes.content   || this.content,
+            this.id,
             changes.completed || this.completed,
             changes.parent    || this.parent,
             changes.children  || this.children
