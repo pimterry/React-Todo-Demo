@@ -6,10 +6,23 @@ export class TodoItem {
     }
 
     updateContent(newContent) {
-        return new TodoItem(newContent, this.completed);
+        return copyWithChanges(this, { content: newContent });
     }
 
     toggleCompletion() {
-        return new TodoItem(this.content, !this.completed);
+        return copyWithChanges(this, { completed: !this.completed });
     }
+}
+
+// Convenience method to build a copy of a todo changing only the parameters provided
+function copyWithChanges(todo, changes) {
+    var constructorArgs = Object.assign({
+        content: todo.content,
+        completed: todo.completed
+    }, changes);
+
+    return new TodoItem(
+        constructorArgs.content,
+        constructorArgs.completed
+    );
 }
