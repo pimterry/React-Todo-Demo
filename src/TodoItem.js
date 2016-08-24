@@ -66,3 +66,9 @@ export default class TodoItem extends Component {
     )
   }
 }
+
+TodoItem.propTypes = {
+  todo: React.PropTypes.object.isRequired,
+  onTodoToggled: React.PropTypes.func.isRequired,
+  onTodoUpdated: React.PropTypes.func.isRequired,
+};
