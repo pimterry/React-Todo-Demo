@@ -16,6 +16,12 @@ export default class TodoList extends Component {
     });
   }
 
+  updateTodo(originalTodo, updatedTodo) {
+    this.setState({
+      todos: this.state.todos.map((todo) => todo === originalTodo ? updatedTodo : todo)
+    });
+  }
+
   toggleTodo(todoToToggle) {
     this.setState({
       todos: this.state.todos.map((todo) => todo === todoToToggle ? todo.toggleCompletion() : todo)
@@ -31,7 +37,10 @@ export default class TodoList extends Component {
 
         <ul>
         {incompleteTodos.map((todo, i) => (
-          <TodoItem todo={todo} key={i} onTodoToggled={this.toggleTodo.bind(this, todo)} />
+          <TodoItem key={i}
+                    todo={todo}
+                    onTodoToggled={this.toggleTodo.bind(this, todo)}
+                    onTodoUpdated={this.updateTodo.bind(this, todo)} />
         ))}
         </ul>
       </div>
