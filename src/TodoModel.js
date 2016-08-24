@@ -94,18 +94,11 @@ export class TodoItem extends ImmutableTreeNode {
 
     // Convenience method to build a copy of this todo, changing only the parameters provided
     copyWithChanges(changes) {
-        var constructorArgs = Object.assign({
-            content: this.content,
-            completed: this.completed,
-            parent: this.parent,
-            children: this.children
-        }, changes);
-
         return new TodoItem(
-            constructorArgs.content,
-            constructorArgs.completed,
-            constructorArgs.parent,
-            constructorArgs.children
+            changes.content   || this.content,
+            changes.completed || this.completed,
+            changes.parent    || this.parent,
+            changes.children  || this.children
         );
     }
 }
