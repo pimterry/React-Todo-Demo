@@ -8,6 +8,7 @@ export default class TodoItem extends Component {
   }
 
   handleClick(event) {
+    event.stopPropagation();
     this.setState(Object.assign({}, this.state,
       { editable: true }));
   }
@@ -56,12 +57,16 @@ export default class TodoItem extends Component {
                    onChange={this.handleContentEdited.bind(this)} />
             <input type="submit" value="Save changes" />
             <input type="button" value="Cancel" onClick={this.handleCancel.bind(this)} />
+
+            <input type="button" value="Make subtask" onClick={this.props.onTodoIndented} />
+            <input type="button" value="Unmake subtask" onClick={this.props.onTodoUnindented} />
           </form>
         ) : (
           <div className="content">
             {todo.content}
           </div>
         )}
+        { this.props.children }
       </li>
     )
   }
@@ -71,4 +76,7 @@ TodoItem.propTypes = {
   todo: React.PropTypes.object.isRequired,
   onTodoToggled: React.PropTypes.func.isRequired,
   onTodoUpdated: React.PropTypes.func.isRequired,
+  onTodoIndented: React.PropTypes.func.isRequired,
+  onTodoUnindented: React.PropTypes.func.isRequired,
+  children: React.PropTypes.node
 };

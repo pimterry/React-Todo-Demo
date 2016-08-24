@@ -24,22 +24,39 @@ export default class TodoList extends Component {
     this.updateTodo(todoToToggle, todoToToggle.toggleCompletion());
   }
 
-  render() {
-    var incompleteTodos = this.state.todos.getIncomplete();
+  indentTodo(todo) {
+    this.setState({ todos: this.state.todos.indentTodo(todo) });
+  }
 
+  unindentTodo(todo) {
+    this.setState({ todos: this.state.todos.unindentTodo(todo) });
+  }
+
+  render() {
     return (
       <div className="todoList">
         <TodoInput onTodoAdded={this.addTodo.bind(this)} />
-
-        <ul>
-        {incompleteTodos.map((todo, i) => (
-          <TodoItem key={i}
-                    todo={todo}
-                    onTodoToggled={this.toggleTodo.bind(this, todo)}
-                    onTodoUpdated={this.updateTodo.bind(this, todo)} />
-        ))}
-        </ul>
+        { this.renderTodos(this.state.todos.children) }
       </div>
+    );
+  }
+
+  renderTodos(todos) {
+    if (todos.length === 0) return;
+
+    return (
+      <ul>
+      { todos.map((todo, i) => (
+        <TodoItem key={i}
+                  todo={todo}
+                  onTodoToggled={this.toggleTodo.bind(this, todo)}
+                  onTodoUpdated={this.updateTodo.bind(this, todo)}
+                  onTodoIndented={this.indentTodo.bind(this, todo)}
+                  onTodoUnindented={this.unindentTodo.bind(this, todo)}>
+          { this.renderTodos(todo.children) }
+        </TodoItem>
+      ))}
+      </ul>
     );
   }
 }
