@@ -55,8 +55,19 @@ export default class TodoList extends Component {
 
     return (
       <ul>
-      { todos.map((todo, i) =>
-        this.state.editing.includes(todo.id) ? (
+      { todos.map((todo, i) => {
+        var subtasks = todo.getChildren((t) => !t.completed);
+
+        var subtaskHtml = subtasks.length > 0 ? (
+          <div className="subtasks">
+            <input type="checkbox"
+                   className="expandCollapseToggle"
+                   onClick={(e) => e.stopPropagation()} />
+            { this.renderTodos(subtasks) }
+          </div>
+        ) : null;
+
+        return this.state.editing.includes(todo.id) ? (
           <EditableTodoItem
                     key={todo.id}
                     todo={todo}
@@ -65,16 +76,17 @@ export default class TodoList extends Component {
                     onTodoIndented={this.indentTodo.bind(this, todo)}
                     onTodoUnindented={this.unindentTodo.bind(this, todo)}
                     onStopEditing={this.stopEditingTodo.bind(this, todo)}>
-            { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+            { subtaskHtml }
           </EditableTodoItem>
         ) : (
           <TodoItem key={todo.id}
                     todo={todo}
                     onTodoToggled={this.toggleTodo.bind(this, todo)}
                     onClick={this.startEditingTodo.bind(this, todo)}>
-            { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+            { subtaskHtml }
           </TodoItem>
-        ))}
+        )
+      })}
       </ul>
     );
   }
