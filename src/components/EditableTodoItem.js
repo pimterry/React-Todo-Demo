@@ -23,7 +23,7 @@ export default class EditableTodoItem extends Component {
     this.props.onStopEditing();
   }
 
-  handleCancelChanges(event) {
+  handleCancel(event) {
     this.setState({ editedContent: this.props.todo.content });
     this.props.onStopEditing();
   }
@@ -31,6 +31,10 @@ export default class EditableTodoItem extends Component {
   handleKeyPress(event) {
     if (event.key === "Escape") {
       this.handleCancel(event);
+    } else if (event.key === "l" && event.ctrlKey) {
+      this.props.onTodoIndented();
+    } else if (event.key === "h" && event.ctrlKey) {
+      this.props.onTodoUnindented();
     }
   }
 
@@ -58,7 +62,7 @@ export default class EditableTodoItem extends Component {
           <Icon fa="save" />
         </button>
 
-        <button type="button" onClick={this.handleCancelChanges.bind(this)}>
+        <button type="button" onClick={this.handleCancel.bind(this)}>
           <Icon fa="undo" />
         </button>
 

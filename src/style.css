@@ -1,8 +1,15 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0 auto;
   max-width: 800px;
-  padding: 0 30px;
+  padding: 0 30px 30px;
   box-sizing: border-box;;
+
+  position: relative;
+  min-height: 95%;
 
   font-family: Lato, Arial, sans-serif;
 }
@@ -140,4 +147,15 @@ input[type=checkbox] {
     left: auto;
     right: -20px;
   }
+}
+
+footer {
+  font-size: 10pt;
+  color: #888;
+
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  text-align: center;
 }
