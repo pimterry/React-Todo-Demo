@@ -25,6 +25,7 @@ export default class TodoInput extends Component {
       <div className="todoInput">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="text"
+                 autoFocus
                  placeholder="What do you want to do?"
                  value={this.state.content}
                  onChange={this.handleContentChange.bind(this)} />
