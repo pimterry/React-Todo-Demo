@@ -6,10 +6,23 @@ import CollapsibleBlock from './CollapsibleBlock';
 import TodoInput from './TodoInput';
 import EditableTodoItem from './EditableTodoItem';
 
+const Filters = {
+    "Incomplete Tasks": (t) => !t.completed,
+    "All Tasks": (t) => true
+};
+
 export default class TodoList extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { todos: new TodoItems(), editing: [] };
+        this.state = {
+            todos: new TodoItems(),
+            editing: [],
+            filter: "Incomplete Tasks"
+        };
+    }
+
+    getFilter() {
+        return Filters[this.state.filter];
     }
 
     addTodo(todo) {
@@ -43,8 +56,18 @@ export default class TodoList extends Component {
     render() {
         return (
             <div className="todoList">
+                <div className="filters">
+                    { Object.keys(Filters).map((filter, i) => (
+                        <button key={i}
+                                className={ this.state.filter === filter ? "active" : "" }
+                                onClick={() => this.setState({filter: filter})}>
+                            {filter}
+                        </button>
+                    ))}
+                </div>
+
                 <TodoInput onTodoAdded={this.addTodo.bind(this)} />
-                { this.renderTodos(this.state.todos.getChildren((t) => !t.completed)) }
+                { this.renderTodos(this.state.todos.getChildren(this.getFilter())) }
             </div>
         );
     }
@@ -70,7 +93,7 @@ export default class TodoList extends Component {
                             onStartEditing={this.startEditingTodo.bind(this, todo)}
                             onStopEditing={this.stopEditingTodo.bind(this, todo)}>
                         <CollapsibleBlock>
-                            { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+                            { this.renderTodos(todo.getChildren(this.getFilter())) }
                         </CollapsibleBlock>
                     </EditableTodoItem>
                 )

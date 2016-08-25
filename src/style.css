@@ -22,6 +22,24 @@ h1 {
     margin: 10px 0 0;
 }
 
+.filters {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+.filters button {
+    font-size: 10pt;
+    padding: 10px;
+    height: auto;
+}
+
+.filters button.active {
+    background-color: #db4c3f;
+    color: #fff;
+    border: none;
+}
+
 form {
     display: flex;
     align-items: center;
@@ -36,6 +54,11 @@ input, button {
 
     border-radius: 2px;
     border: 1px solid #ddd;
+}
+
+input:focus, button:focus {
+    outline: 0;
+    box-shadow: 0 0 3px 1px #db4c3f;
 }
 
 input[type=text] {
@@ -124,7 +147,7 @@ input[type=checkbox] {
     border-radius: 6px;
 }
 
-.completionToggle label:hover {
+.completionToggle label:hover, .completionToggle input:checked ~ label {
     background-color: #db4c3f;
 }
 
