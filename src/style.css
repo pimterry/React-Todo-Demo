@@ -1,0 +1,123 @@
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 30px;
+  box-sizing: border-box;;
+
+  font-family: Lato, Arial, sans-serif;
+}
+
+h1 {
+  font-family: "Baloo Tamma";
+  color: #db4c3f;
+  font-size: 50pt;
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+  margin: 0 5px;
+
+  font-size: 10pt;
+
+  flex-grow: 1;
+}
+
+input[type=submit], input[type=button] {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #444;
+  border-radius: 2px;
+
+  flex-grow: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ul ul {
+  padding-left: 28px;
+}
+
+li {
+  position: relative;
+  cursor: pointer;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  width: 100%;
+  min-height: 40px;
+
+  border-top: 1px solid #ccc;
+}
+
+li .content {
+  flex-grow: 1;
+  margin: 10px;
+  min-height: 40px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+li:hover {
+  background-color: #fafafa;
+}
+
+input[type=checkbox] {
+  height: auto;
+}
+
+.labelledCheckbox {
+  position: absolute;
+  top: 21px;
+}
+
+.labelledCheckbox input {
+  position: absolute;
+  left: -9999px;
+}
+
+.labelledCheckbox label {
+  cursor: pointer;
+  display: block;
+}
+
+.completionToggle {
+  left: -20px;
+}
+
+.completionToggle label {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #db4c3f;
+  border-radius: 6px;
+}
+
+.completionToggle label:hover {
+  background-color: #db4c3f;
+}
+
+.collapsable {
+  width: 100%;
+}
+
+.collapsable > .labelledCheckbox {
+  left: -40px;
+}

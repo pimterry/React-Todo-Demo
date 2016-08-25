@@ -6,7 +6,6 @@ import CollapsibleBlock from './CollapsibleBlock';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import EditableTodoItem from './EditableTodoItem';
-import './TodoList.css';
 
 export default class TodoList extends Component {
   constructor(props, context) {
