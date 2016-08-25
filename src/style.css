@@ -58,7 +58,7 @@ ul ul {
   padding-left: 28px;
 }
 
-li {
+.todo {
   position: relative;
   cursor: pointer;
 
@@ -72,9 +72,9 @@ li {
   border-top: 1px solid #ccc;
 }
 
-li .content {
+.todo .content {
   flex-grow: 1;
-  margin: 10px;
+  margin: 10px 5px 10px 10px;
   min-height: 40px;
   width: 100%;
 
@@ -82,7 +82,7 @@ li .content {
   align-items: center;
 }
 
-li:hover {
+.todo:hover {
   background-color: #fafafa;
 }
 
