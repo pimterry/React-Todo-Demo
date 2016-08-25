@@ -23,12 +23,14 @@ export default class TodoItem extends ImmutableTreeNode {
 
     // Convenience method to build a copy of this todo, changing only the parameters provided
     copyWithChanges(changes) {
+        var args = Object.assign({}, this, changes);
+
         return new TodoItem(
-            changes.content   || this.content,
-            this.id,
-            changes.completed || this.completed,
-            changes.parent    || this.parent,
-            changes.children  || this.children
+            args.content,
+            this.id, // <- note that we don't allow id changes
+            args.completed,
+            args.parent,
+            args.children
         );
     }
 }
