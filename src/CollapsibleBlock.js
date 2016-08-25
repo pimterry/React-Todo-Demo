@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import Icon from './Icon';
 import LabelledCheckbox from './LabelledCheckbox';
 
 export default class CollapsibleBlock extends Component {
@@ -12,13 +14,10 @@ export default class CollapsibleBlock extends Component {
     }
 
     render() {
-        var label = (<i className={ "fa " + (this.state.collapsed ?
-                                             "fa-caret-right" :
-                                             "fa-caret-down") } />);
         return (
             <div className="collapsable">
                 <LabelledCheckbox
-                 label={ label }
+                 label={( <Icon fa={ this.state.collapsed ? "caret-right" : "caret-down" } /> )}
                  onChange={this.handleToggleCollapsed.bind(this)} />
                 { this.state.collapsed ? null : this.props.children}
             </div>
