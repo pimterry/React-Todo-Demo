@@ -13,16 +13,16 @@ export default class TodoItems extends ImmutableTreeNode {
         return this.updateChild(originalTodo, updatedTodo);
     }
 
-    indentTodo(todoToIndent) {
+    indentTodo(todoToIndent, filter) {
         var initialParent = todoToIndent.parent;
 
-        var incompleteSiblings = initialParent.children.filter((c) => !c.completed);
-        var todoIndex = incompleteSiblings.indexOf(todoToIndent);
+        var validSiblings = initialParent.children.filter(filter);
+        var todoIndex = validSiblings.indexOf(todoToIndent);
 
         // Do nothing if todo doesn't have a valid preceeding sibling
         if (todoIndex < 1) return this;
 
-        var targetParent = incompleteSiblings[todoIndex - 1];
+        var targetParent = validSiblings[todoIndex - 1];
         return this.moveChild(todoToIndent, targetParent);
     }
 

@@ -46,7 +46,7 @@ export default class TodoList extends Component {
     }
 
     indentTodo(todo) {
-        this.setState({ todos: this.state.todos.indentTodo(todo) });
+        this.setState({ todos: this.state.todos.indentTodo(todo, this.getFilter()) });
     }
 
     unindentTodo(todo) {
