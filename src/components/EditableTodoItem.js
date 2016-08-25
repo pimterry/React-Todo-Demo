@@ -23,9 +23,8 @@ export default class EditableTodoItem extends Component {
     this.props.onStopEditing();
   }
 
-  handleCancel(event) {
-    event.stopPropagation();
-    event.preventDefault();
+  handleCancelChanges(event) {
+    this.setState({ editedContent: this.props.todo.content });
     this.props.onStopEditing();
   }
 
@@ -35,53 +34,72 @@ export default class EditableTodoItem extends Component {
     }
   }
 
-  handleIndented(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.props.onTodoIndented();
-  }
-
-  handleUnindented(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.props.onTodoUnindented();
+  handleClick(event) {
+    // Ignore bubbled events from anything else
+    if (event.target === this.refs.content ||
+        event.target === this.refs.liWrapper) {
+      this.props.onStartEditing();
+    }
   }
 
   render() {
     var todo = this.props.todo;
 
+    var content = this.props.editing ? (
+      <form onSubmit={this.handleSaveChanges.bind(this)}
+            onKeyDown={this.handleKeyPress.bind(this)}>
+        <input className="content"
+               type="text"
+               autoFocus
+               value={this.state.editedContent}
+               onChange={this.handleContentEdited.bind(this)} />
+
+        <button type="submit" onClick={(e) => e.stopPropagation()}>
+          <Icon fa="save" />
+        </button>
+
+        <button type="button" onClick={this.handleCancelChanges.bind(this)}>
+          <Icon fa="undo" />
+        </button>
+
+        <button type="button" onClick={this.props.onTodoUnindented}>
+          <Icon fa="dedent" />
+        </button>
+
+        <button type="button" onClick={this.props.onTodoIndented}>
+        <Icon fa="indent" />
+        </button>
+      </form>
+    ) : (
+      <div ref="content" className="content">
+        {todo.content}
+      </div>
+    );
+
     return (
-      <li className="todo editable">
+      <li ref="liWrapper"
+          className="todo"
+          onClick={this.handleClick.bind(this)}>
         <LabelledCheckbox className="completionToggle"
                           value={todo.completed}
                           onChange={this.props.onTodoToggled} />
-
-        <form onSubmit={this.handleSaveChanges.bind(this)}
-              onKeyDown={this.handleKeyPress.bind(this)}>
-          <input className="content"
-                 type="text"
-                 autoFocus
-                 value={this.state.editedContent}
-                 onChange={this.handleContentEdited.bind(this)} />
-          <button onClick={(e) => e.stopPropagation()} type="submit"><Icon fa="save" /></button>
-          <button onClick={this.handleCancel.bind(this)}><Icon fa="undo" /></button>
-
-          <button onClick={this.handleUnindented.bind(this)}><Icon fa="dedent" /></button>
-          <button onClick={this.handleIndented.bind(this)}><Icon fa="indent" /></button>
-        </form>
-
+        { content }
         { this.props.children }
       </li>
-    )
+    );
   }
 }
 
 EditableTodoItem.propTypes = {
   todo: React.PropTypes.object.isRequired,
+  editing: React.PropTypes.bool.isRequired,
+
+  onStartEditing: React.PropTypes.func.isRequired,
   onTodoToggled: React.PropTypes.func.isRequired,
   onTodoUpdated: React.PropTypes.func.isRequired,
   onTodoIndented: React.PropTypes.func.isRequired,
   onTodoUnindented: React.PropTypes.func.isRequired,
   onStopEditing: React.PropTypes.func.isRequired,
+
   children: React.PropTypes.node
 };

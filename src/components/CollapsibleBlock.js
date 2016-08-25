@@ -14,7 +14,9 @@ export default class CollapsibleBlock extends Component {
     }
 
     render() {
-        return (
+        if (!this.props.children) return null;
+
+        else return (
             <div className="collapsable">
                 <LabelledCheckbox
                  label={( <Icon fa={ this.state.collapsed ? "caret-right" : "caret-down" } /> )}

@@ -9,10 +9,8 @@ export default class LabelledCheckbox extends Component {
                 <input type="checkbox"
                        id={ id }
                        value={ this.props.value }
-                       onChange={ this.props.onChange }
-                       onClick={(e) => e.stopPropagation()} />
-                <label htmlFor={ id }
-                       onClick={(e) => e.stopPropagation()} >
+                       onChange={ this.props.onChange }/>
+                <label htmlFor={ id } >
                        { this.props.label }
                 </label>
             </div>

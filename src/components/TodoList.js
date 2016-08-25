@@ -4,7 +4,6 @@ import TodoItems from '../models/TodoItems';
 
 import CollapsibleBlock from './CollapsibleBlock';
 import TodoInput from './TodoInput';
-import TodoItem from './TodoItem';
 import EditableTodoItem from './EditableTodoItem';
 
 export default class TodoList extends Component {
@@ -56,31 +55,24 @@ export default class TodoList extends Component {
     return (
       <ul>
       { todos.map((todo, i) => {
-        var subtasks = todo.getChildren((t) => !t.completed);
-        var subtaskHtml = subtasks.length > 0 ? (
-            <CollapsibleBlock>
-              { this.renderTodos(subtasks) }
-            </CollapsibleBlock>
-        ) : null;
-
-        return this.state.editing.includes(todo.id) ? (
+        return (
           <EditableTodoItem
                     key={todo.id}
                     todo={todo}
+                    editing={this.state.editing.includes(todo.id)}
+
                     onTodoToggled={this.toggleTodo.bind(this, todo)}
                     onTodoUpdated={this.updateTodo.bind(this, todo)}
+
                     onTodoIndented={this.indentTodo.bind(this, todo)}
                     onTodoUnindented={this.unindentTodo.bind(this, todo)}
+
+                    onStartEditing={this.startEditingTodo.bind(this, todo)}
                     onStopEditing={this.stopEditingTodo.bind(this, todo)}>
-            { subtaskHtml }
+            <CollapsibleBlock>
+              { this.renderTodos(todo.getChildren((t) => !t.completed)) }
+            </CollapsibleBlock>
           </EditableTodoItem>
-        ) : (
-          <TodoItem key={todo.id}
-                    todo={todo}
-                    onTodoToggled={this.toggleTodo.bind(this, todo)}
-                    onClick={this.startEditingTodo.bind(this, todo)}>
-            { subtaskHtml }
-          </TodoItem>
         )
       })}
       </ul>
