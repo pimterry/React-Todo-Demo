@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TodoItem } from './TodoModel';
+import TodoItem from '../models/TodoItem';
 
 export default class TodoInput extends Component {
   constructor(props, context) {

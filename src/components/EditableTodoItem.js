@@ -51,7 +51,7 @@ export default class EditableTodoItem extends Component {
     var todo = this.props.todo;
 
     return (
-      <li>
+      <li className="todo editable">
         <LabelledCheckbox className="completionToggle"
                           value={todo.completed}
                           onChange={this.props.onTodoToggled} />

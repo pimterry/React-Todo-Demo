@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TodoItems } from './TodoModel';
+import TodoItems from '../models/TodoItems';
 
 import CollapsibleBlock from './CollapsibleBlock';
 import TodoInput from './TodoInput';

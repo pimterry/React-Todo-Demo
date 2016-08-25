@@ -17,7 +17,7 @@ export default class TodoItem extends Component {
     var todo = this.props.todo;
 
     return (
-      <li onClick={this.handleClick.bind(this)}>
+      <li className="todo" onClick={this.handleClick.bind(this)}>
         <LabelledCheckbox className="completionToggle"
                           value={todo.completed}
                           onChange={this.props.onTodoToggled} />
