@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import LabelledCheckbox from './LabelledCheckbox';
+
 export default class EditableTodoItem extends Component {
   constructor(props, context) {
     super(props, context);
@@ -46,7 +48,9 @@ export default class EditableTodoItem extends Component {
 
     return (
       <li>
-        <input type="checkbox" value={todo.completed} onChange={this.props.onTodoToggled} />
+        <LabelledCheckbox className="completionToggle"
+                          value={todo.completed}
+                          onChange={this.props.onTodoToggled} />
 
         <form onSubmit={this.handleSaveChanges.bind(this)}
               onKeyDown={this.handleKeyPress.bind(this)}>

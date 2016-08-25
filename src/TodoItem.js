@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 
+import LabelledCheckbox from './LabelledCheckbox';
+
 export default class TodoItem extends Component {
   handleToggled(event) {
     event.stopPropagation();
     this.props.onTodoToggled();
   }
 
+  handleClick(event) {
+    event.stopPropagation();
+    this.props.onClick();
+  }
+
   render() {
     var todo = this.props.todo;
 
     return (
-      <li onClick={this.props.onClick}>
-        <input type="checkbox"
-               value={todo.completed}
-               onChange={this.props.onTodoToggled}
-               onClick={(e) => e.stopPropagation()} />
+      <li onClick={this.handleClick.bind(this)}>
+        <LabelledCheckbox className="completionToggle"
+                          value={todo.completed}
+                          onChange={this.props.onTodoToggled} />
         <div className="content">
           {todo.content}
         </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { TodoItems } from './TodoModel';
 
+import CollapsibleBlock from './CollapsibleBlock';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import EditableTodoItem from './EditableTodoItem';
@@ -57,14 +58,10 @@ export default class TodoList extends Component {
       <ul>
       { todos.map((todo, i) => {
         var subtasks = todo.getChildren((t) => !t.completed);
-
         var subtaskHtml = subtasks.length > 0 ? (
-          <div className="subtasks">
-            <input type="checkbox"
-                   className="expandCollapseToggle"
-                   onClick={(e) => e.stopPropagation()} />
-            { this.renderTodos(subtasks) }
-          </div>
+            <CollapsibleBlock>
+              { this.renderTodos(subtasks) }
+            </CollapsibleBlock>
         ) : null;
 
         return this.state.editing.includes(todo.id) ? (
