@@ -10,5 +10,5 @@ export default class Icon extends Component {
 }
 
 Icon.propTypes = {
-  fa: React.PropTypes.string.isRequired,
+    fa: React.PropTypes.string.isRequired,
 };

@@ -19,10 +19,10 @@ export default class LabelledCheckbox extends Component {
 }
 
 LabelledCheckbox.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  value: React.PropTypes.any,
-  onChange: React.PropTypes.func,
-  label: React.PropTypes.oneOfType([React.PropTypes.string,
+    id: React.PropTypes.string,
+    className: React.PropTypes.string,
+    value: React.PropTypes.any,
+    onChange: React.PropTypes.func,
+    label: React.PropTypes.oneOfType([React.PropTypes.string,
                                     React.PropTypes.element])
 };

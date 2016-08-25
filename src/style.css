@@ -1,46 +1,46 @@
 html {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 30px 30px;
-  box-sizing: border-box;;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 30px 30px;
+    box-sizing: border-box;;
 
-  position: relative;
-  min-height: 95%;
+    position: relative;
+    min-height: 95%;
 
-  font-family: Lato, Arial, sans-serif;
+    font-family: Lato, Arial, sans-serif;
 }
 
 h1 {
-  font-family: "Baloo Tamma";
-  color: #db4c3f;
-  font-size: 50pt;
-  text-align: center;
-  margin: 10px 0 0;
+    font-family: "Baloo Tamma";
+    color: #db4c3f;
+    font-size: 50pt;
+    text-align: center;
+    margin: 10px 0 0;
 }
 
 form {
-  display: flex;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 input, button {
-  height: 40px;
-  padding: 5px 10px;
-  box-sizing: border-box;
-  margin: 0 5px;
+    height: 40px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    margin: 0 5px;
 
-  border-radius: 2px;
-  border: 1px solid #ddd;
+    border-radius: 2px;
+    border: 1px solid #ddd;
 }
 
 input[type=text] {
-  flex-grow: 1;
-  font-size: 10pt;
+    flex-grow: 1;
+    font-size: 10pt;
 }
 
 button, input[type=submit] {
@@ -55,107 +55,107 @@ button, input[type=submit] {
 }
 
 ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 
-  width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 ul ul {
-  padding-left: 28px;
+    padding-left: 28px;
 }
 
 .todo {
-  position: relative;
-  cursor: pointer;
+    position: relative;
+    cursor: pointer;
 
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
-  width: 100%;
-  min-height: 40px;
+    width: 100%;
+    min-height: 40px;
 
-  border-top: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 }
 
 .todo .content {
-  flex-grow: 1;
-  margin: 10px 5px 10px 10px;
-  min-height: 40px;
-  width: 100%;
+    flex-grow: 1;
+    margin: 10px 5px 10px 10px;
+    min-height: 40px;
+    width: 100%;
 
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .todo:hover {
-  background-color: #fafafa;
+    background-color: #fafafa;
 }
 
 input[type=checkbox] {
-  height: auto;
+    height: auto;
 }
 
 .labelledCheckbox {
-  position: absolute;
-  top: 22px;
+    position: absolute;
+    top: 22px;
 }
 
 .labelledCheckbox input {
-  position: absolute;
-  left: -9999px;
+    position: absolute;
+    left: -9999px;
 }
 
 .labelledCheckbox label {
-  cursor: pointer;
-  display: block;
+    cursor: pointer;
+    display: block;
 }
 
 .completionToggle {
-  left: -25px;
+    left: -25px;
 }
 
 .completionToggle label {
-  width: 15px;
-  height: 15px;
-  border: 2px solid #db4c3f;
-  border-radius: 6px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #db4c3f;
+    border-radius: 6px;
 }
 
 .completionToggle label:hover {
-  background-color: #db4c3f;
+    background-color: #db4c3f;
 }
 
 .collapsable {
-  width: 100%;
+    width: 100%;
 }
 
 .collapsable > .labelledCheckbox {
-  top: 18px;
-  left: -45px;
-  font-size: 15pt;
+    top: 18px;
+    left: -45px;
+    font-size: 15pt;
 }
 
 .collapsable > labelledCheckbox label {
-  padding: 5px;
+    padding: 5px;
 }
 
 @media(max-width: 850px) {
-  .collapsable > .labelledCheckbox {
-    left: auto;
-    right: -20px;
-  }
+    .collapsable > .labelledCheckbox {
+        left: auto;
+        right: -20px;
+    }
 }
 
 footer {
-  font-size: 10pt;
-  color: #888;
+    font-size: 10pt;
+    color: #888;
 
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
-  text-align: center;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    text-align: center;
 }
