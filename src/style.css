@@ -93,7 +93,7 @@ input[type=checkbox] {
 
 .labelledCheckbox {
   position: absolute;
-  top: 21px;
+  top: 22px;
 }
 
 .labelledCheckbox input {
@@ -107,7 +107,7 @@ input[type=checkbox] {
 }
 
 .completionToggle {
-  left: -20px;
+  left: -25px;
 }
 
 .completionToggle label {
@@ -126,5 +126,18 @@ input[type=checkbox] {
 }
 
 .collapsable > .labelledCheckbox {
-  left: -40px;
+  top: 18px;
+  left: -45px;
+  font-size: 15pt;
+}
+
+.collapsable > labelledCheckbox label {
+  padding: 5px;
+}
+
+@media(max-width: 850px) {
+  .collapsable > .labelledCheckbox {
+    left: auto;
+    right: -20px;
+  }
 }
