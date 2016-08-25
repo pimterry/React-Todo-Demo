@@ -8,7 +8,7 @@ export default class LabelledCheckbox extends Component {
             <div className={ "labelledCheckbox " + (this.props.className || "") }>
                 <input type="checkbox"
                        id={ id }
-                       value={ this.props.value }
+                       checked={ this.props.value }
                        onChange={ this.props.onChange }/>
                 <label htmlFor={ id } >
                        { this.props.label }
