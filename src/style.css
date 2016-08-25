@@ -147,7 +147,15 @@ input[type=checkbox] {
     border-radius: 6px;
 }
 
-.completionToggle label:hover, .completionToggle input:checked ~ label {
+.completionToggle label:hover {
+    background-color: #fdbeb8;
+}
+
+.completionToggle label:active {
+    background-color: #db4c3f;
+}
+
+.completionToggle input:checked ~ label {
     background-color: #db4c3f;
 }
 
