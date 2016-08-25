@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import ImmutableTreeNode from './ImmutableTreeNode';
 
+// Immutable model for a single Todo item
 export default class TodoItem extends ImmutableTreeNode {
     constructor(content, id = uuid.v4(), completed = false, parent = null, children = []) {
         super(parent,

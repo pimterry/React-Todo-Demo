@@ -11,6 +11,7 @@ const Filters = {
     "All Tasks": (t) => true
 };
 
+// Component that renders the top-level app: some filters, an input, and the todo item hierarchy
 export default class TodoList extends Component {
     constructor(props, context) {
         super(props, context);

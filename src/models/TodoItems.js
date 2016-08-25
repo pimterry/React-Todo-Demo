@@ -1,5 +1,6 @@
 import ImmutableTreeNode from './ImmutableTreeNode';
 
+// Immutable model representing a collection of Todos.
 export default class TodoItems extends ImmutableTreeNode {
     constructor(todos = []) {
         super(null, todos, null, (newTodos) => new TodoItems(newTodos));

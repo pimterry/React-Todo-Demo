@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TodoItem from '../models/TodoItem';
 
+// Component for inputting a todo. Responsible for all initial Todo creation.
 export default class TodoInput extends Component {
     constructor(props, context) {
         super(props, context);

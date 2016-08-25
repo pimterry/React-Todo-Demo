@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
+// Generic checkbox + label component, so we can easily do nice checkbox styling
 export default class LabelledCheckbox extends Component {
     render() {
         var id = this.props.id || uuid.v4();

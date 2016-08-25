@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Icon from './Icon';
 import LabelledCheckbox from './LabelledCheckbox';
 
+// Represents a single todo, togglable between editing/not editing with props.editing.
+// Lots of UI controls, but hands most high-level action off to props.onX.
 export default class EditableTodoItem extends Component {
     constructor(props, context) {
         super(props, context);

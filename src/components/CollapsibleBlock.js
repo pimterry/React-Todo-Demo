@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Icon from './Icon';
 import LabelledCheckbox from './LabelledCheckbox';
 
+// A block wrapping some components, toggling on click, with an icon indicating
+// its status. Renders nothing if the props.children is empty.
 export default class CollapsibleBlock extends Component {
     constructor(props, context) {
         super(props, context);
