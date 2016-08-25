@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Icon from './Icon';
 import LabelledCheckbox from './LabelledCheckbox';
 
 export default class EditableTodoItem extends Component {
@@ -24,6 +25,7 @@ export default class EditableTodoItem extends Component {
 
   handleCancel(event) {
     event.stopPropagation();
+    event.preventDefault();
     this.props.onStopEditing();
   }
 
@@ -35,11 +37,13 @@ export default class EditableTodoItem extends Component {
 
   handleIndented(event) {
     event.stopPropagation();
+    event.preventDefault();
     this.props.onTodoIndented();
   }
 
   handleUnindented(event) {
     event.stopPropagation();
+    event.preventDefault();
     this.props.onTodoUnindented();
   }
 
@@ -59,11 +63,11 @@ export default class EditableTodoItem extends Component {
                  autoFocus
                  value={this.state.editedContent}
                  onChange={this.handleContentEdited.bind(this)} />
-          <input type="submit" value="Save changes" />
-          <input type="button" value="Cancel" onClick={this.handleCancel.bind(this)} />
+          <button onClick={(e) => e.stopPropagation()} type="submit"><Icon fa="save" /></button>
+          <button onClick={this.handleCancel.bind(this)}><Icon fa="undo" /></button>
 
-          <input type="button" value="Make subtask" onClick={this.handleIndented.bind(this)} />
-          <input type="button" value="Unmake subtask" onClick={this.handleUnindented.bind(this)} />
+          <button onClick={this.handleUnindented.bind(this)}><Icon fa="dedent" /></button>
+          <button onClick={this.handleIndented.bind(this)}><Icon fa="indent" /></button>
         </form>
 
         { this.props.children }
