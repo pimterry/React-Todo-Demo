@@ -30,12 +30,14 @@ class ImmutableTreeNode {
     // and adding it to the parent when that is found too.
     // Note that if the parent is the child, or any descendent of the child, then this effectively
     // just removes the child from the tree.
-    moveChild(originalChild, targetParent) {
+    moveChild(originalChild, targetParent, targetIndex = targetParent.children.length) {
         var updatedChildren = this.children.filter((child) => {
             return child !== originalChild;
         }).map((child) => child.moveChild(originalChild, targetParent));
 
-        if (this === targetParent) updatedChildren.push(originalChild.setParent(this));
+        if (this === targetParent) {
+            updatedChildren.splice(targetIndex, 0, originalChild);
+        }
 
         return this.setChildren(updatedChildren);
     }
@@ -74,7 +76,10 @@ export class TodoItems extends ImmutableTreeNode {
     unindentTodo(todoToUnindent) {
         // Can't unindent nodes already at the root
         if (todoToUnindent.parent === this) return this;
-        else return this.moveChild(todoToUnindent, todoToUnindent.parent.parent);
+
+        var targetParent = todoToUnindent.parent.parent;
+        var targetIndex = targetParent.children.indexOf(todoToUnindent.parent) + 1;
+        return this.moveChild(todoToUnindent, targetParent, targetIndex);
     }
 }
 
